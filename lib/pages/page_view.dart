@@ -56,7 +56,7 @@ class _MyPageViewState extends State<MyPageView> {
     "images/much.jpg","images/mottai.jpg",
     "images/ph33.jpg","images/PH32.jpg",
   ];
-    final TITLE=["Movies Review","Mr.Banana Live Show",
+    final TITLE=["Movies Revie","Mr.Banana Live Show",
     "The Mindvalley","Blow your mind",
     "Holy Shift","Mucho Success",
     "Tehran Sens","That’s What She Said",

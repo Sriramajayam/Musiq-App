@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:musiq/contants/contant_color.dart';
 import 'package:musiq/pages/List_view.dart';
+import 'package:musiq/pages/normal_page_view.dart';
 import 'package:musiq/pages/page0.dart';
 import 'package:musiq/pages/podcast_view.dart';
-// import 'package:podcostmusicapp/Pages/List_view.dart';
-// import 'package:podcostmusicapp/Pages/Listpages.dart';
-// import 'package:podcostmusicapp/Pages/page0.dart';
-// import 'package:podcostmusicapp/Pages/page2.dart';
-// import 'package:podcostmusicapp/Pages/podcostview.dart';
-// import 'package:podcostmusicapp/contants/contant_color.dart';
 import 'profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'page1.dart';
@@ -30,7 +25,8 @@ class _bottomState extends State<bottom> {
 static const List<Widget>_widgetoptions=<Widget>[
   pages0(),
     Pages(),
-    podcastt(),
+    NormalPageView(),
+    // podcastt(),
     List_view(),
      profilepage(),
 

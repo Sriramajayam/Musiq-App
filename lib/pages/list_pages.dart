@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:podcostmusicapp/contants/contant_color.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:musiq/pages/conversation.dart';
 
 import '../contants/contant_color.dart';
 
@@ -29,40 +30,40 @@ final listtext=[
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       children: [
-        Container(
-          height: 50,
-          color: color1,
-          child: ListView(
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            children: List.generate(listtext.length, (index) => Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: IntrinsicWidth(
-                child: InkWell(
-                  onTap: (){
-                    selectedindex=index;
-                    setState(() {
-                      selectedindex;
-                    });
-                  },
-                  child: Column(
-                    children: [
-                      Text(listtext[index].toString(),
-                      style: TextStyle(
-                        color: color2
-                      ),),
-                      Container(
-                       height: 2, 
-                       color: selectedindex==index?Colors.red:Colors.transparent 
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            )),
-          )
-        ),
+        // Container(
+        //   height: 50,
+        //   color: color1,
+        //   child: ListView(
+        //     shrinkWrap: true,
+        //     physics: BouncingScrollPhysics(),
+        //     scrollDirection: Axis.horizontal,
+        //     children: List.generate(listtext.length, (index) => Padding(
+        //       padding: const EdgeInsets.all(15.0),
+        //       child: IntrinsicWidth(
+        //         child: InkWell(
+        //           onTap: (){
+        //             selectedindex=index;
+        //             setState(() {
+        //               selectedindex;
+        //             });
+        //           },
+        //           child: Column(
+        //             children: [
+        //               Text(listtext[index].toString(),
+        //               style: TextStyle(
+        //                 color: color2
+        //               ),),
+        //               Container(
+        //                height: 2, 
+        //                color: selectedindex==index?Colors.red:Colors.transparent 
+        //               )
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //     )),
+        //   )
+        // ),
          
         
           //  Container(  
@@ -570,30 +571,36 @@ final listtext=[
                ),
                Padding(
                  padding: const EdgeInsets.only(left: 12),
-                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     Container(
-                      height: 120,
-                      width: 120,
-                      decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.black
-                       ),
-                      child: Image.asset("images/ph23.png"),
-    
-    
-                      ),
-                       Padding(
-                     padding: const EdgeInsets.only(top: 4),
-                     child: Text29,
+                 child: InkWell(
+                  onTap: () {
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                   conversation(),));
+                  },
+                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       Container(
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.black
+                         ),
+                        child: Image.asset("images/ph23.png"),
+                     
+                     
+                        ),
+                         Padding(
+                       padding: const EdgeInsets.only(top: 4),
+                       child: Text29,
+                     ),
+                     Padding(
+                       padding: const EdgeInsets.only(top: 2),
+                       child: Text30,
+                     ),
+                        
+                     ],
                    ),
-                   Padding(
-                     padding: const EdgeInsets.only(top: 2),
-                     child: Text30,
-                   ),
-                      
-                   ],
                  ),
                ),
     
