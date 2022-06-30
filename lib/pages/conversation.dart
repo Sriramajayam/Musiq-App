@@ -1,9 +1,16 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musiq/contants/contant_color.dart';
+import 'package:musiq/pages/normal_page_view.dart';
+import 'package:musiq/pages/page0.dart';
+import 'package:musiq/pages/page1.dart';
 class conversation extends StatefulWidget {
-  const conversation({Key? key}) : super(key: key);
+   String text;
+  final headline;
+  conversation({Key? key,required this.headline,required this.text}) : super(key: key);
 
   @override
   State<conversation> createState() => _conversationState();
@@ -18,10 +25,11 @@ final punchtexts=[
   "podcast summary is a brief blurb of text that "
 ];
 final punchimage=[
-  "images/ph23.png","images/ph23.png","images/ph23.png",
-  "images/ph23.png","images/ph23.png","images/ph23.png",
-  "images/ph23.png",
-  "images/ph23.png","images/ph23.png","images/ph23.png",
+
+  // "images/ph23.png","images/ph23.png","images/ph23.png",
+  // "images/ph23.png","images/ph23.png","images/ph23.png",
+  // "images/ph23.png",
+  // "images/ph23.png","images/ph23.png","images/ph23.png",
 ];
 final punchtitle=[
   "Motivation","The furry man","Hard work","Power",
@@ -57,11 +65,13 @@ final punchsubtitle=[
               children: [
                Stack(
                  children: [
-                   Image.asset("images/punch.png",height: 300,),
+                   Image.asset(widget.text,height: 200,
+                   width: double.maxFinite,
+                   fit: BoxFit.fill,),
                    Column(
                      children: [
                        Container(
-                        height: 150,
+                        height: 100,
                         decoration:BoxDecoration(
                           color: color1,
                           gradient: LinearGradient(
@@ -80,7 +90,7 @@ final punchsubtitle=[
                        ),
                      
                    Container(
-                    height: 150,
+                    height: 100,
                     width: double.maxFinite,
                     decoration: BoxDecoration(
                       color: color1,
@@ -101,7 +111,7 @@ final punchsubtitle=[
                         mainAxisAlignment:MainAxisAlignment.end ,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                        Text("Stuff you should know",style: GoogleFonts.poppins(
+                        Text(widget.headline,style: GoogleFonts.poppins(
                           textStyle:TextStyle(color: color2,fontSize: 25,fontWeight: FontWeight.w600)
                         ),),
                           Text("MusiQ Studios - Jay shetty",style: GoogleFonts.poppins(
@@ -187,46 +197,54 @@ final punchsubtitle=[
                   ],
                  ),
                ),
-               Column(
-                children: List.generate(9, (index) => 
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    
-                    children: [Image.asset
-                  (punchimage[index].toString(),height: 60,width: 60,),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 13),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          
-                          Text(punchtitle[index].toString(),style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,color: color2
-                            )
-                          ),),
-                           Text(punchsubtitle[index].toString(),style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,color: color3
-                            )
-                          ),),
-                        ],
+               InkWell(
+                onTap: (() {
+                 
+                 String imagess=widget.text;
+                  Navigator.push(context, MaterialPageRoute(builder: 
+                  (context)=>pages0(huge:imagess )));
+                }),
+                 child: Column(
+                  children: List.generate(9, (index) => 
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      
+                      children: [Image.asset
+                    (widget.text.toString(),height: 60,width: 60,),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 13),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            
+                            Text(punchtitle[index].toString(),style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,color: color2
+                              )
+                            ),),
+                             Text(punchsubtitle[index].toString(),style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,color: color3
+                              )
+                            ),),
+                          ],
+                        ),
                       ),
                     ),
+                    Spacer(),
+                    Icon(Icons.more_vert_rounded,color: color2,)
+                    ]
+               
+                    ),
                   ),
-                  Spacer(),
-                  Icon(Icons.more_vert_rounded,color: color2,)
-                  ]
-
+               
+                             
                   ),
-                ),
-
-              
-                ),
+                 ),
                )
           ],
         

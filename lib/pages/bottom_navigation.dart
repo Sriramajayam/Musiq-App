@@ -7,6 +7,8 @@ import 'package:musiq/pages/podcast_view.dart';
 import 'profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'page1.dart';
+ 
+
 void main(){
   runApp(bottom());
 }
@@ -23,7 +25,7 @@ static const List<Widget>_widgetoptions=<Widget>[
 class _bottomState extends State<bottom> {
   int _selectedintex=0;
 static const List<Widget>_widgetoptions=<Widget>[
-  pages0(),
+  pages0(huge: "images/pic12.png",),
     Pages(),
     NormalPageView(),
     // podcastt(),

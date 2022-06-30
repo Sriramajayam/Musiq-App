@@ -40,8 +40,9 @@ class _ScafoldState extends State<Scafold> {
 "All","News","Comedy","Technology","TV&flim","All","News","Comedy","Technology","TV&flim",
 ];
 List<StatefulWidget> pages = [
-        MyApps(),
-        ListPage()
+       
+        ListPage(),
+         MyApps(),
       ];
 
   

@@ -6,7 +6,8 @@ import 'package:musiq/contants/contant_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class pages0 extends StatefulWidget {
-const pages0({Key? key}) : super(key: key);
+  final huge;
+const pages0({Key? key,required this.huge}) : super(key: key);
 
   @override
   State<pages0> createState() => _pages0State();
@@ -26,138 +27,140 @@ final pointtext=[
       color: color1,
       home: Scaffold(
         backgroundColor: color1,
-        body: Column(
-          children: [
-            Stack(
-              children: [
-                ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                  child: Image.asset("images/ted.png",height: 440,width:
-                   double.maxFinite,
-                ),
-                ),
-                Container(
-                  height: 420,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient:LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                      Colors.transparent.withOpacity(0.20),
-                      color1.withOpacity(1),
-                    ])
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(widget.huge,height: 420,width:
+                     double.maxFinite,fit: BoxFit.fill,
                   ),
+                  ),
+                  Container(
+                    height: 420,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient:LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                        Colors.transparent.withOpacity(0.20),
+                        color1.withOpacity(1),
+                      ])
+                    ),
+                  ),
+                 Padding(
+                   padding: const EdgeInsets.only(top: 350),
+                   child: Center(
+                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+               
+                      children:[
+                      
+                      Text("Yeah, I don’t know",style:
+                      GoogleFonts.poppins(
+                        textStyle: TextStyle(color: color2
+                        )
+                      ),
+                      ),
+                       Text("May be I should change myself",style:
+                      GoogleFonts.poppins(
+                        textStyle: TextStyle(color: color5
+                        )
+                      ),
+                      ),
+                       Text("You are tough to be around sometimes",style:
+                      GoogleFonts.poppins(
+                        textStyle: TextStyle(color: color3
+                        )
+                      ),
+                      ),
+                      
+                      ]
+                      ),
+                   ),
+                 )
+            ],
+          ),
+          Text("Ted Talks Daily",style: GoogleFonts.poppins(
+            textStyle: TextStyle(
+              color: color2,fontSize: 17,fontWeight: FontWeight.w500
+            )
+          ),),
+           Text("Episode-215, Virdas",style: GoogleFonts.poppins(
+            textStyle: TextStyle(
+              color: color5,fontSize: 13,fontWeight: FontWeight.w500
+            )
+          ),),
+          Padding(
+            padding: const EdgeInsets.only(right: 24,left: 24,top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                 onTap: (() {
+                   showModalBottomSheet(context: context, 
+                  builder: (context)=>numbersheet(context),
+                  backgroundColor: Colors.transparent);
+                 }),
+                  child: Text("1.0x",style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                      color: color2,fontSize: 16,fontWeight: FontWeight.w500
+                    )
+                  ),),
                 ),
-               Padding(
-                 padding: const EdgeInsets.only(top: 350),
-                 child: Center(
-                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-             
-                    children:[
-                    
-                    Text("Yeah, I don’t know",style:
-                    GoogleFonts.poppins(
-                      textStyle: TextStyle(color: color2
-                      )
-                    ),
-                    ),
-                     Text("May be I should change myself",style:
-                    GoogleFonts.poppins(
-                      textStyle: TextStyle(color: color5
-                      )
-                    ),
-                    ),
-                     Text("You are tough to be around sometimes",style:
-                    GoogleFonts.poppins(
-                      textStyle: TextStyle(color: color3
-                      )
-                    ),
-                    ),
-                    
-                    ]
-                    ),
-                 ),
-               )
-          ],
-        ),
-        Text("Ted Talks Daily",style: GoogleFonts.poppins(
-          textStyle: TextStyle(
-            color: color2,fontSize: 17,fontWeight: FontWeight.w500
-          )
-        ),),
-         Text("Episode-215, Virdas",style: GoogleFonts.poppins(
-          textStyle: TextStyle(
-            color: color5,fontSize: 13,fontWeight: FontWeight.w500
-          )
-        ),),
-        Padding(
-          padding: const EdgeInsets.only(right: 24,left: 24,top: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
               InkWell(
-               onTap: (() {
-                 showModalBottomSheet(context: context, 
-                builder: (context)=>numbersheet(context),
-                backgroundColor: Colors.transparent);
-               }),
-                child: Text("1.0x",style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                    color: color2,fontSize: 16,fontWeight: FontWeight.w500
-                  )
-                ),),
-              ),
-            InkWell(
-              onTap: (() {
-                showModalBottomSheet(context: context, 
-                builder: (context)=>bulidsheet(context),
-                backgroundColor: Colors.transparent);
-              }),
-              
-              child: Icon(Icons.dark_mode_rounded
-               ,color: color2,),
-            ) 
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 100,left: 24,right: 24),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(Icons.skip_previous_rounded,color: color2,size: 40,),
-              Icon(Icons.replay_10_rounded,color: color2,size: 40,),
-              Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Colors.red
-                ),
-                child: 
-              InkWell
-              (
                 onTap: (() {
-                 
-                  setState(() {
-                    tapindex=!tapindex;
-                  });
+                  showModalBottomSheet(context: context, 
+                  builder: (context)=>bulidsheet(context),
+                  backgroundColor: Colors.transparent);
                 }),
-               child: tapindex==false?Icon(Icons.play_arrow_rounded,
-               color: color2,size: 40,):
-               Icon(Icons.pause,color: color2,size: 40,)
-              )
-              ),
-              Icon(Icons.forward_10_rounded,color: color2,size: 40,),
-              Icon(Icons.skip_next_rounded,color: color2,size: 40,),
-            ],
+                
+                child: Icon(Icons.dark_mode_rounded
+                 ,color: color2,),
+              ) 
+              ],
+            ),
           ),
-        )
-          ]
-      ),
+          Padding(
+            padding: const EdgeInsets.only(top: 100,left: 24,right: 24),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(Icons.skip_previous_rounded,color: color2,size: 40,),
+                Icon(Icons.replay_10_rounded,color: color2,size: 40,),
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.red
+                  ),
+                  child: 
+                InkWell
+                (
+                  onTap: (() {
+                   
+                    setState(() {
+                      tapindex=!tapindex;
+                    });
+                  }),
+                 child: tapindex==false?Icon(Icons.play_arrow_rounded,
+                 color: color2,size: 40,):
+                 Icon(Icons.pause,color: color2,size: 40,)
+                )
+                ),
+                Icon(Icons.forward_10_rounded,color: color2,size: 40,),
+                Icon(Icons.skip_next_rounded,color: color2,size: 40,),
+              ],
+            ),
+          )
+            ]
+              ),
+        ),
       )
     );
   }
