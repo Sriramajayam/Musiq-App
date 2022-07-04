@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musiq/contants/contant_color.dart';
-import 'package:musiq/pages/list_pages.dart';
-import 'package:musiq/pages/profile_page.dart';
+import 'package:musiq/pages/podcastscreen/music_player_podcast.dart';
+
+import 'package:musiq/pages/profilescreen/profile_page.dart';
 
 
 
-class List_view extends StatefulWidget {
-  const List_view({Key? key}) : super(key: key);
+
+class ListView extends StatefulWidget {
+  const ListView({Key? key}) : super(key: key);
 
   @override
-  State<List_view> createState() => _List_viewState();
+  State<ListView> createState() => _ListViewState();
 
   
 }
 
-class _List_viewState extends State<List_view> {
+class _ListViewState extends State<ListView> {
 int _selectedintex=0;
 static const List<Widget>_widgetoptions=<Widget>[
-  profilepage(),
+  ProfilePage(),
 ];
 
   void _onitemtapped(int index){
@@ -45,7 +47,7 @@ static const List<Widget>_widgetoptions=<Widget>[
            
            fontWeight: FontWeight.w600
            ),),),
-           body: ListPage(),
+           body: PodcastAll(),
            
                  
 

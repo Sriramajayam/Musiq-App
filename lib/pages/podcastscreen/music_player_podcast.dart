@@ -2,32 +2,30 @@ import 'package:flutter/material.dart';
 // import 'package:podcostmusicapp/contants/contant_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musiq/contants/consFile.dart';
-import 'package:musiq/pages/conversation.dart';
+import 'package:musiq/pages/podcastscreen/episodes.dart';
 
-import '../contants/contant_color.dart';
+import '../../contants/contant_color.dart';
 
-class ListPage extends StatefulWidget {
-  const ListPage({Key? key}) : super(key: key);
+class PodcastAll extends StatefulWidget {
+  const PodcastAll({Key? key}) : super(key: key);
 
   @override
-  State<ListPage> createState() => _ListPageState();
+  State<PodcastAll> createState() => _PodcastAllState();
 }
 
-class _ListPageState extends State<ListPage> {
+class _PodcastAllState extends State<PodcastAll> {
   int selectedindex=0;
   void onitemtapped(int index){
   print(index);
   setState(() {
     selectedindex=index;
   });}
-  
-final listtext=[
-"All","News","Comedy","Technology","TV&flim","All","News","Comedy","Technology","TV&flim",
-];
+ 
   @override
   Widget build(BuildContext context) {
     return
     ListView(
+      
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       children: [
@@ -50,50 +48,48 @@ final listtext=[
               physics: BouncingScrollPhysics(),
                shrinkWrap: true,
                scrollDirection:Axis.horizontal,
-               children:   List.generate(3, (index) =>  Expanded(
-                 child: Padding(
-                   padding: const EdgeInsets.only(left: 10),
-                   child: InkWell(
-                    onTap: () {
+               children:   List.generate(3, (index) =>  Padding(
+                 padding: const EdgeInsets.only(left: 10),
+                 child: InkWell(
+                  onTap: () {
 
-                       
-                        String ph25=con1image[index].toString();
-                           String ph24=con1Title[index].toString();
-                        
                      
-                        
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                   conversation(text:ph25,headline: ph24,)));
-                    },
-                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      String ph25=con1image[index].toString();
+                         String ph24=con1Title[index].toString();
                       
-                       children: [
-                         Image.asset(con1image[index].toString()),
-                         Padding(
-                           padding: const EdgeInsets.only(top: 4),
-                           child: Text(con1Title[index].toString(),style:
-                             GoogleFonts.poppins(
-                            textStyle:TextStyle(
-                              color:color2,
-                              overflow: TextOverflow.ellipsis
-                         ),
-                             )
+                   
+                      
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                 Episodes(text:ph25,headline: ph24,)));
+                  },
+                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    
+                     children: [
+                       Image.asset(con1image[index].toString()),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 4),
+                         child: Text(con1Title[index].toString(),style:
+                           GoogleFonts.poppins(
+                          textStyle:TextStyle(
+                            color:color2,
+                            overflow: TextOverflow.ellipsis
+                       ),
                            )
-                             ),
-                         Padding(
-                           padding: const EdgeInsets.only(top: 2),
-                           child: Text(con3Subtitle[index].toString(),
-                             style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                color:color3,
-                        fontSize: 12,fontWeight: FontWeight.w400
-                              )
-                             ),
-                             ),
-                         ),
-                       ],
-                     ),
+                         )
+                           ),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 2),
+                         child: Text(con3Subtitle[index].toString(),
+                           style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                              color:color3,
+                      fontSize: 12,fontWeight: FontWeight.w400
+                            )
+                           ),
+                           ),
+                       ),
+                     ],
                    ),
                  ),
                ),
@@ -119,46 +115,44 @@ final listtext=[
               physics: BouncingScrollPhysics(),
                shrinkWrap: true,
                scrollDirection:Axis.horizontal,
-               children: List.generate(3, (index) =>  Expanded(
-                 child: Padding(
-                   padding: const EdgeInsets.only(left: 10),
-                   child: InkWell(
+               children: List.generate(3, (index) =>  Padding(
+                 padding: const EdgeInsets.only(left: 10),
+                 child: InkWell(
 
-                    onTap: () {
-                      
-                      String ph24=con2image[index].toString();
-                       String ph25=con3Title[index].toString();
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                   conversation(text:ph24,headline: ph25,),));
-                    },
-                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      
-                       children: [
-                         Image.asset(con2image[index].toString()),
-                         Padding(
-                           padding: const EdgeInsets.only(top: 4),
-                           child: Text(con3Title[index].toString(),style:
-                             GoogleFonts.poppins(
-                            textStyle:TextStyle(
-                              color:color2,
-                         ),
-                             )
+                  onTap: () {
+                    
+                    String ph24=con2image[index].toString();
+                     String ph25=con3Title[index].toString();
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                 Episodes(text:ph24,headline: ph25,),));
+                  },
+                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    
+                     children: [
+                       Image.asset(con2image[index].toString()),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 4),
+                         child: Text(con3Title[index].toString(),style:
+                           GoogleFonts.poppins(
+                          textStyle:TextStyle(
+                            color:color2,
+                       ),
                            )
-                             ),
-                         Padding(
-                           padding: const EdgeInsets.only(top: 2),
-                           child: Text(con3Subtitle[index].toString(),
-                             style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                color:color3,
-                        fontSize: 12,fontWeight: FontWeight.w400
-                              )
-                             ),
-                             ),
-                         ),
-                       ],
-                     ),
+                         )
+                           ),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 2),
+                         child: Text(con3Subtitle[index].toString(),
+                           style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                              color:color3,
+                      fontSize: 12,fontWeight: FontWeight.w400
+                            )
+                           ),
+                           ),
+                       ),
+                     ],
                    ),
                  ),
                ),
@@ -255,7 +249,7 @@ final listtext=[
                       String ph23=con3image[index].toString();
                        String ph24=con3Title[index].toString();
                      Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                   conversation(text:ph23,headline: ph24,),));
+                   Episodes(text:ph23,headline: ph24,),));
                   }),
                   child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -324,7 +318,7 @@ final listtext=[
                   String ph23=con4image[index].toString();
                        String ph24=con3Title[index].toString();
                      Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                   conversation(text:ph23,headline: ph24,),));
+                   Episodes(text:ph23,headline: ph24,),));
                 }),
                  child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

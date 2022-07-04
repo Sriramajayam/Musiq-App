@@ -1,34 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musiq/contants/contant_color.dart';
-import 'package:musiq/pages/list_pages.dart';
-import 'package:musiq/pages/page_view.dart';
-class NormalPageView extends StatefulWidget {
-  const NormalPageView({Key? key}) : super(key: key);
+import 'package:musiq/pages/podcastscreen/music_player_podcast.dart';
+import 'package:musiq/pages/podcastscreen/podcast_all.dart';
+
+class PodCastMainScreen extends StatefulWidget {
+   PodCastMainScreen({Key? key}) : super(key: key);
 
   @override
-  State<NormalPageView> createState() => _NormalPageViewState();
-}
-
-class _NormalPageViewState extends State<NormalPageView> {
-  @override
-  Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scafold(),
-    );
-  }
-}
-class Scafold extends StatefulWidget {
-   Scafold({Key? key}) : super(key: key);
-
-  @override
-  State<Scafold> createState() => _ScafoldState();
+  State<PodCastMainScreen> createState() => _PodCastMainScreenState();
    
    
 }
 
-class _ScafoldState extends State<Scafold> {
+class _PodCastMainScreenState extends State<PodCastMainScreen> {
   int selecteddindex=0;
   void intapped(int index){
     setState(() {
@@ -39,13 +24,13 @@ class _ScafoldState extends State<Scafold> {
    final listtextses=[
 "All","News","Comedy","Technology","TV&flim","All","News","Comedy","Technology","TV&flim",
 ];
-List<StatefulWidget> pages = [
+List pages = [
        
-        ListPage(),
-         MyApps(),
+        PodcastAll(),
+         Center(child: Text("HJKKHJ"),)
+,         MyPageView(),
+         MyPageView(),
       ];
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +66,6 @@ List<StatefulWidget> pages = [
                         print(selecteddindex);
                         setState(() {
                           selecteddindex;
-                 
                         });
                       },
                       child: Column(
@@ -93,10 +77,7 @@ List<StatefulWidget> pages = [
                           Container(
                            height: 2, 
                            color: selecteddindex==index?Colors.red:Colors.transparent 
-                          ),
-                        
-                        
-                          
+                          )
                         ],
                       ),
                     ),
@@ -107,6 +88,7 @@ List<StatefulWidget> pages = [
                   ),
                  ),
                ),
+         
                Expanded(
                   child: PageView.builder(
                     itemCount: listtextses.length,
@@ -116,22 +98,8 @@ List<StatefulWidget> pages = [
                       });
                     },
                     itemBuilder: (context,index) {
-                  // return Container(
-                  
-                  //   height: 150,
-                  //   width: 150,
-                  //   color: Colors.lightBlue,
-                  //   child: Center(
-                  //     child:Text(listtextses[selecteddindex])
-                  //   ),
-                  // );
-                  //   },
-                  return Expanded(
-             
-                child:  pages[selecteddindex]
-                  
-                    
-                  );
+                 
+                  return pages[selecteddindex];
                    
                     }
                    

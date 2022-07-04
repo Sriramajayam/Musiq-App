@@ -5,18 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 
-class nextpage extends StatefulWidget {
-  const nextpage ({Key? key}) : super(key: key);
+class MyProfilePage extends StatefulWidget {
+  const MyProfilePage ({Key? key}) : super(key: key);
   @override
-  State<nextpage> createState() => _nextpageState();
+  State<MyProfilePage> createState() => _MyProfilePageState();
 }
-class _nextpageState extends State<nextpage> {
+class _MyProfilePageState extends State<MyProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return  Scaffold(
         backgroundColor:Color.fromRGBO(22, 21, 28, 1),
         body: SafeArea(child: 
        SingleChildScrollView(
@@ -167,8 +165,8 @@ class _nextpageState extends State<nextpage> {
          ),
        ),
         )
-        ),
-    );
+        );
+    
   }
 }
  Widget bulidsheet(context)=>
@@ -193,9 +191,7 @@ class _nextpageState extends State<nextpage> {
               )
             ),),
             trailing:IconButton(onPressed: (){
-              // Navigator.pop(context);
-              //         Navigator.pop(context,MaterialPageRoute(builder: (context)
-              //         =>profilepage()));
+             
               Navigator.pop(context);
                     }, 
        icon:Icon(Icons.close_rounded,color:

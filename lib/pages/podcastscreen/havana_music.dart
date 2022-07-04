@@ -7,14 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:musiq/contants/contant_color.dart';
 // import 'package:podcostmusicapp/contants/contant_color.dart';
 
-class Pages extends StatefulWidget {
-  const Pages({Key? key}) : super(key: key);
+class HavanaMusic extends StatefulWidget {
+  const HavanaMusic({Key? key}) : super(key: key);
 
   @override
-  State<Pages> createState() => _PagesState();
+  State<HavanaMusic> createState() => _HavanaMusic();
 }
 
-class _PagesState extends State<Pages> {
+class _HavanaMusic extends State<HavanaMusic> {
   final listtexts=[
     "Single","Duration : 3mins 25 secs",
     "Release : 2016",

@@ -1,22 +1,23 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musiq/contants/contant_color.dart';
-import 'package:musiq/pages/normal_page_view.dart';
-import 'package:musiq/pages/page0.dart';
-import 'package:musiq/pages/page1.dart';
-class conversation extends StatefulWidget {
+import 'package:musiq/pages/podcastscreen/episode_info.dart';
+import 'package:musiq/pages/podcastscreen/podcast.dart';
+import 'package:musiq/pages/podcastscreen/music_player.dart';
+import 'package:musiq/pages/podcastscreen/havana_music.dart';
+import 'episode_info.dart';
+class Episodes extends StatefulWidget {
    String text;
   final headline;
-  conversation({Key? key,required this.headline,required this.text}) : super(key: key);
+  Episodes({Key? key,required this.headline,required this.text}) : super(key: key);
 
   @override
-  State<conversation> createState() => _conversationState();
+  State<Episodes> createState() => _EpisodesState();
 }
 
-class _conversationState extends State<conversation> {
+class _EpisodesState extends State<Episodes> {
   @override
   
   Widget build(BuildContext context) {
@@ -26,10 +27,7 @@ final punchtexts=[
 ];
 final punchimage=[
 
-  // "images/ph23.png","images/ph23.png","images/ph23.png",
-  // "images/ph23.png","images/ph23.png","images/ph23.png",
-  // "images/ph23.png",
-  // "images/ph23.png","images/ph23.png","images/ph23.png",
+  
 ];
 final punchtitle=[
   "Motivation","The furry man","Hard work","Power",
@@ -48,10 +46,7 @@ final punchsubtitle=[
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent
     ));
-    return MaterialApp(
-      
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return  Scaffold(
       
         backgroundColor: color1,
         body:ListView(
@@ -72,6 +67,7 @@ final punchsubtitle=[
                      children: [
                        Container(
                         height: 100,
+                        width: double.maxFinite,
                         decoration:BoxDecoration(
                           color: color1,
                           gradient: LinearGradient(
@@ -84,11 +80,18 @@ final punchsubtitle=[
             
                           ]),
                        
-                        )
-                       
-                        ,
+                        ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 350),
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: Icon(Icons.arrow_back_ios_rounded,
+                          color: color2,),
+                        ),
+                      ),
                        ),
-                     
                    Container(
                     height: 100,
                     width: double.maxFinite,
@@ -128,30 +131,28 @@ final punchsubtitle=[
                )
               ]
                ),
-               Expanded(
-                 child: Padding(
-                   padding: const EdgeInsets.all(16.0),
-                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                     children: [
-                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(punchtexts.length, (index) =>
-                        Text(punchtexts[index].toString(),style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                            color: color6,fontSize: 15,fontWeight: FontWeight.w400
-                          )
-                        ),)
-                        )
-                       ),
-                       Text("show more",style: GoogleFonts.poppins(
+               Padding(
+                 padding: const EdgeInsets.all(16.0),
+                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(punchtexts.length, (index) =>
+                      Text(punchtexts[index].toString(),style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                          color: color2,
-                          fontSize: 15,fontWeight: FontWeight.w500
+                          color: color6,fontSize: 15,fontWeight: FontWeight.w400
                         )
-                       ),)
-                     ],
-                   ),
+                      ),)
+                      )
+                     ),
+                     Text("show more",style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        color: color2,
+                        fontSize: 15,fontWeight: FontWeight.w500
+                      )
+                     ),)
+                   ],
                  ),
                ),
                Padding(
@@ -202,7 +203,7 @@ final punchsubtitle=[
                  
                  String imagess=widget.text;
                   Navigator.push(context, MaterialPageRoute(builder: 
-                  (context)=>pages0(huge:imagess )));
+                  (context)=>MainMusicPlayer(allText:imagess,subText: imagess, )));
                 }),
                  child: Column(
                   children: List.generate(9, (index) => 
@@ -236,7 +237,38 @@ final punchsubtitle=[
                       ),
                     ),
                     Spacer(),
-                    Icon(Icons.more_vert_rounded,color: color2,)
+                   PopupMenuButton(
+                    offset:Offset (0,45),
+                    color: Color.fromRGBO(33, 33, 44, 1),
+                    icon: Icon(Icons.more_vert_rounded,color: 
+                    color2),
+                    shape:RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                    
+                    
+                    itemBuilder: (BuildContext context ){
+                          return [
+                            
+                         PopupMenuItem(child:  Text("Play Next",style: 
+                         TextStyle(color:color2),)),
+                         PopupMenuItem(child: InkWell(
+                          onTap: (() {
+                            print("123");
+                            String mytext=punchtitle[index].toString();
+                            String myinfo=widget.text;
+                            String myhead=punchsubtitle[index].toString();
+                            Navigator.push(context,
+                             MaterialPageRoute(builder: (context) => EpisodesInfo(w1image:myinfo ,w1text:mytext ,w2text: myhead,),));
+                          }),
+                           child: Text("Episode info",style: 
+                           TextStyle(color:color2)),
+                         ))
+
+                          ];
+
+                    }),
+                    
                     ]
                
                     ),
@@ -249,7 +281,7 @@ final punchsubtitle=[
           ],
         
         ),
-      ),
-    );
+      );
+    
   }
 }

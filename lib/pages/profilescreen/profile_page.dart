@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'next_page.dart';
-class profilepage extends StatefulWidget {
-  const profilepage({Key? key}) : super(key: key);
+import 'profile_edit.dart';
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<profilepage> createState() => _profilepageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _profilepageState extends State<profilepage> {
+class _ProfilePageState extends State<ProfilePage> {
 int _selectedintex=0;
 
 
@@ -58,31 +58,7 @@ void _onitemtapped(int index){
              backgroundImage: NetworkImage("https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
             ),
           ),
-        //  Padding(
-        //    padding: const EdgeInsets.only(top: 20,left: 150),
-        //    child: Container(
-        //     height: 100,
-        //     width: 100,
-           
-        //     decoration: BoxDecoration(
-        //       borderRadius: BorderRadius.circular(50),
-        //        color: Colors.white,
-               
-        //     ),
-        //     child:
-        //    Image.network("https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-        //    , height: 100,
-        //      width: 30,
-        //     ),
-        //    ),
-        //  ),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 20,left: 128,right: 127),
-          //   child: Image.network(
-              
-          //     'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
-          //     ,height: 100,),
-          // ),
+        
           Padding(
             padding: const EdgeInsets.all(0.0),
             child: Padding(
@@ -103,7 +79,7 @@ void _onitemtapped(int index){
                      IconButton(onPressed: (){
                     Navigator.push(
                                context,
-                     MaterialPageRoute(builder: (context) => nextpage()),
+                     MaterialPageRoute(builder: (context) => MyProfilePage()),
         );
                      },
                icon:Icon( Icons.arrow_forward_ios),
@@ -265,124 +241,7 @@ void _onitemtapped(int index){
         
       ),
       ),
-      // bottomNavigationBar: 
-      
-      //   BottomNavigationBar(
-        
-          
-        
-        
-      //   type: BottomNavigationBarType.fixed,
-      //     backgroundColor: Color.fromARGB(27, 100, 100, 100),
-        
-      //     items: <BottomNavigationBarItem>
-      //   [
-      //     BottomNavigationBarItem(
-      //      icon: Column(
-      //       children: [
-             
-      //        CircleAvatar(
-      //         backgroundColor: _selectedintex==0?Colors.red:Colors.transparent,
-             
-      //         child: Icon(Icons.home,color: _selectedintex==0?
-      //       Colors.white:Color.fromRGBO(255, 255, 255, 0.35)),
-      //        ),
-    
-             
-      //         Text("Home",style: 
-      //         GoogleFonts.poppins(textStyle:
-              
-      //         TextStyle(
-      //           color: _selectedintex==0?
-      //       Colors.white:Color.fromRGBO(255, 255, 255, 0.35) ),),
-      //         )
-      //       ],
-           
-      //      ),
-      //      label: ""
-          
-            
-          
-      //     ),
-    
-      //    BottomNavigationBarItem(
-      //      icon: Column(
-      //       children: [
-      //         CircleAvatar(
-      //           backgroundColor: _selectedintex==1?Colors.red:Colors.transparent,
-      //           child: Icon(Icons.music_note,color: _selectedintex==1?
-      //       Colors.white:Color.fromRGBO(255, 255, 255, 0.35),),
-      //         ),
-      //         Text("Library",style:
-      //         GoogleFonts.poppins(textStyle:
-      //          TextStyle(
-      //            color: _selectedintex==1?
-      //       Colors.white:Color.fromRGBO(255, 255, 255, 0.35)),),
-      //         )
-      //       ],
-      //      ),
-      //      label: ""
-          
-            
-          
-      //     ),
-    
-      //    BottomNavigationBarItem(
-      //      icon: Column(
-      //       children: [
-      //        CircleAvatar(
-      //         backgroundColor: _selectedintex==2?Colors.red:Colors.transparent,
-      //         child: Icon(Icons.podcasts,color: _selectedintex==2?
-      //       Colors.white:Color.fromRGBO(255, 255, 255, 0.35)),
-      //        ),
-              
-      //         Text("Podcost",style: 
-      //         GoogleFonts.poppins(textStyle: 
-      //         TextStyle(
-      //          color: _selectedintex==2?
-      //       Colors.white:Color.fromRGBO(255, 255, 255, 0.35)),),
-      //         )
-      //       ],
-      //      ),
-      //      label: ""
-          
-            
-          
-      //     ),
-         
-    
-      //     BottomNavigationBarItem(
-      //      icon: Column(
-      //       children: [
-      //         CircleAvatar(
-      //           backgroundColor:_selectedintex==3? Colors.red:Colors.transparent,
-      //           child: Icon(Icons.person,color: _selectedintex==3?
-      //       Colors.white:Color.fromRGBO(255, 255, 255, 0.35),),
-      //         ),
-             
-      //         Text("Profile",style:
-      //         GoogleFonts.poppins(textStyle: 
-      //          TextStyle(color: _selectedintex==3?
-      //       Colors.white:Color.fromRGBO(255, 255, 255, 0.35)
-      //           ),),
-      //         )
-      //       ],
-      //      ),
-      //      label: ""
-          
-            
-          
-      //     ),
      
-      //     ],
-      //     currentIndex: _selectedintex,
-      //     selectedItemColor: Colors.yellow,
-      //     unselectedItemColor: Color.fromRGBO(255, 255, 255, 0.35),
-          
-      //     onTap: _onitemtapped,
-          
-          
-      //     ),
     );
   }
   
