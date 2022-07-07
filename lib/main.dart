@@ -4,6 +4,7 @@ import 'package:musiq/contants/contant_color.dart';
  
  
 import 'package:musiq/pages/bottom_naigation_bar.dart';
+import 'package:musiq/pages/progress_bar/progress_bar.dart';
 void main(){
    runApp(  MainApp());
 }
@@ -20,7 +21,7 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       color: color1,
       debugShowCheckedModeBanner: false,
-      home:Bottom()
+      home:CustomProgressBar()
      
 
     );
