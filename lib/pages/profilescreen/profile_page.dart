@@ -79,7 +79,8 @@ void _onitemtapped(int index){
                      IconButton(onPressed: (){
                     Navigator.push(
                                context,
-                     MaterialPageRoute(builder: (context) => MyProfilePage()),
+                     MaterialPageRoute(builder: (context) => 
+                     MyProfilePage()),
         );
                      },
                icon:Icon( Icons.arrow_forward_ios),

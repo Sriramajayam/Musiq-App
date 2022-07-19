@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:podcostmusicapp/contants/contant_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musiq/contants/consFile.dart';
+import 'package:musiq/pages/model/model.dart';
 import 'package:musiq/pages/podcastscreen/episodes.dart';
-
 import '../../contants/contant_color.dart';
 
 class PodcastAll extends StatefulWidget {
@@ -25,11 +24,9 @@ class _PodcastAllState extends State<PodcastAll> {
   Widget build(BuildContext context) {
     return
     ListView(
-      
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       children: [
-       
          Padding(
            padding: const EdgeInsets.only(left: 16),
            child: Text("Recentlty Played",style:GoogleFonts.poppins(
@@ -48,28 +45,22 @@ class _PodcastAllState extends State<PodcastAll> {
               physics: BouncingScrollPhysics(),
                shrinkWrap: true,
                scrollDirection:Axis.horizontal,
-               children:   List.generate(3, (index) =>  Padding(
+               children:   List.generate(recentlyPlayed.length, (index) =>  Padding(
                  padding: const EdgeInsets.only(left: 10),
                  child: InkWell(
                   onTap: () {
-
-                     
                       String ph25=con1image[index].toString();
                          String ph24=con1Title[index].toString();
-                      
-                   
-                      
                    Navigator.push(context, MaterialPageRoute(builder: (context) => 
                  Episodes(text:ph25,headline: ph24,)));
                   },
                    child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    
                      children: [
-                       Image.asset(con1image[index].toString()),
+                       Image.asset(recentlyPlayed[index].podCastImage),
                        Padding(
                          padding: const EdgeInsets.only(top: 4),
-                         child: Text(con1Title[index].toString(),style:
+                         child: Text(recentlyPlayed[index].PodCastTitle,style:
                            GoogleFonts.poppins(
                           textStyle:TextStyle(
                             color:color2,
@@ -80,7 +71,7 @@ class _PodcastAllState extends State<PodcastAll> {
                            ),
                        Padding(
                          padding: const EdgeInsets.only(top: 2),
-                         child: Text(con3Subtitle[index].toString(),
+                         child: Text(recentlyPlayed[index].PodCastSubTitle,
                            style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                               color:color3,
@@ -93,12 +84,7 @@ class _PodcastAllState extends State<PodcastAll> {
                    ),
                  ),
                ),
-               
-               
-               
-               
                )
-              
              ),
            ),
          ),
@@ -115,12 +101,10 @@ class _PodcastAllState extends State<PodcastAll> {
               physics: BouncingScrollPhysics(),
                shrinkWrap: true,
                scrollDirection:Axis.horizontal,
-               children: List.generate(3, (index) =>  Padding(
+               children: List.generate(TopPodcast.length, (index) =>  Padding(
                  padding: const EdgeInsets.only(left: 10),
                  child: InkWell(
-
                   onTap: () {
-                    
                     String ph24=con2image[index].toString();
                      String ph25=con3Title[index].toString();
                    Navigator.push(context, MaterialPageRoute(builder: (context) => 
@@ -128,12 +112,11 @@ class _PodcastAllState extends State<PodcastAll> {
                   },
                    child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    
                      children: [
-                       Image.asset(con2image[index].toString()),
+                       Image.asset(TopPodcast[index].podCastImage),
                        Padding(
                          padding: const EdgeInsets.only(top: 4),
-                         child: Text(con3Title[index].toString(),style:
+                         child: Text(TopPodcast[index].PodCastTitle,style:
                            GoogleFonts.poppins(
                           textStyle:TextStyle(
                             color:color2,
@@ -143,7 +126,7 @@ class _PodcastAllState extends State<PodcastAll> {
                            ),
                        Padding(
                          padding: const EdgeInsets.only(top: 2),
-                         child: Text(con3Subtitle[index].toString(),
+                         child: Text(TopPodcast[index].PodCastSubTitle,
                            style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                               color:color3,
@@ -156,12 +139,7 @@ class _PodcastAllState extends State<PodcastAll> {
                    ),
                  ),
                ),
-               
-               
-               
-               
                )
-              
              ),
            ),
          ),
@@ -176,57 +154,18 @@ class _PodcastAllState extends State<PodcastAll> {
             physics: BouncingScrollPhysics(),
              shrinkWrap: true,
                scrollDirection:Axis.horizontal,
-             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: InkWell(
-                  onTap: (() {
-                    
-                  }),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 240,
-                        width: 190,
-                        decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset("images/ph7.png")),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 2,top: 4,),
-                        child: Text24,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-               Padding(
-                padding: const EdgeInsets.only(left: 16,bottom: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 240,
-                      width: 190,
-                      decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: color1
-                      ),
-                      child: Image.asset("images/ph8.png"),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20,top:4,),
-                      child: Text25,
-                    ),
-                  ],
-                ),
-              )
-             ],
+             children:List.generate(Artist.length, (index) => 
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Image.asset(Artist[index].ArtistImage,height: 240,width: 190,),
+                   Text(Artist[index].ArtistTitle,style: TextStyle(color: color2),)
+                 ],
+               ),
+             ),
+             )
           ),
         ),
         Padding(
@@ -242,7 +181,7 @@ class _PodcastAllState extends State<PodcastAll> {
               physics: BouncingScrollPhysics(),
                shrinkWrap: true,
                scrollDirection:Axis.horizontal,
-               children: List.generate(3, (index) =>
+               children: List.generate(TopPodcast1.length, (index) =>
                
                 InkWell(
                   onTap: (() {
@@ -263,12 +202,12 @@ class _PodcastAllState extends State<PodcastAll> {
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.black
                          ),
-                        child: Image.asset(con3image[index].toString()),
+                        child: Image.asset(TopPodcast1[index].podCastImage),
                         ),
                      ),
                      Padding(
                        padding: const EdgeInsets.only(top: 4),
-                       child: Text(con3Title[index].toString(),style:
+                       child: Text(TopPodcast1[index].PodCastTitle,style:
                        GoogleFonts.poppins(
                       textStyle:TextStyle(
                         color:color2,
@@ -279,7 +218,7 @@ class _PodcastAllState extends State<PodcastAll> {
                      
                      Padding(
                        padding: const EdgeInsets.only(top: 2),
-                       child: Text(con3Subtitle[index].toString(),
+                       child: Text(TopPodcast1[index].PodCastSubTitle,
                        style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                           color:color3,
@@ -333,12 +272,12 @@ class _PodcastAllState extends State<PodcastAll> {
                         color: Colors.black
                          ),
                         child: Image.asset
-                        (con4image[index].toString()),
+                        (TopPodcast2[index].podCastImage),
                         ),
                      ),
                     Padding(
                        padding: const EdgeInsets.only(top: 4),
-                       child: Text(con3Title[index].toString(),style:
+                       child: Text(TopPodcast2[index].PodCastTitle,style:
                        GoogleFonts.poppins(
                       textStyle:TextStyle(
                         color:color2,
@@ -349,7 +288,7 @@ class _PodcastAllState extends State<PodcastAll> {
                      
                      Padding(
                        padding: const EdgeInsets.only(top: 2),
-                       child: Text(con3Subtitle[index].toString(),
+                       child: Text(TopPodcast2[index].PodCastSubTitle,
                        style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                           color:color3,
@@ -358,26 +297,15 @@ class _PodcastAllState extends State<PodcastAll> {
                        ),
                        )
                      ),
-                   
                    ],
                  ),
                ),
-              
-                       
-               
              ),
            ),
          ),
     
           )
-    
       ],
-      
-      
     );
-    
-    
-   
-     
   }
 }

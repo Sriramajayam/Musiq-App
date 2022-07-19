@@ -1,7 +1,10 @@
 
-
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 
 
@@ -9,11 +12,19 @@ class MyProfilePage extends StatefulWidget {
   const MyProfilePage ({Key? key}) : super(key: key);
   @override
   State<MyProfilePage> createState() => _MyProfilePageState();
+  
+  
 }
-class _MyProfilePageState extends State<MyProfilePage> {
 
+class _MyProfilePageState extends State<MyProfilePage> {
+ 
+   
+
+   
   @override
   Widget build(BuildContext context) {
+    
+    
     return  Scaffold(
         backgroundColor:Color.fromRGBO(22, 21, 28, 1),
         body: SafeArea(child: 
@@ -54,7 +65,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     padding: const EdgeInsets.only(top: 25),
                     child: Stack(
                       children: [
-                        Image.asset("images/ph30.png",),
+                    
+                        //  Image.asset("images/ph30.png",),
                         Padding(
                           padding: const EdgeInsets.only(top: 80,left: 78),
                           child: Positioned(
@@ -64,6 +76,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
                            showModalBottomSheet(context: context
                            , builder:( context)=>bulidsheet(context),
                            backgroundColor: Colors.transparent,
+                           
+
                            );
                             // clipBehavior: Clip.antiAlias,
                           //  builderckgroundColor: Colors.transparent,: (BuildContext context)
@@ -135,8 +149,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   Spacer(),
                     InkWell(
                       onTap: (){
-                         setState(() {
-                }); 
+                         setState(()
+                          {
+                          
+                            }); 
                       },
                       child: Padding(
                        padding: const EdgeInsets.only(right: 16,
@@ -169,8 +185,35 @@ class _MyProfilePageState extends State<MyProfilePage> {
     
   }
 }
- Widget bulidsheet(context)=>
-  
+
+
+ Widget bulidsheet(context){
+  File? Image;
+  Future pickImage()async{
+  try{
+    final Image=await ImagePicker().pickImage(source: ImageSource.camera,);
+    if(Image==null) return;
+    final imagetemp=File(Image.path);
+   
+
+  }on PlatformException catch(e){
+    print("filed to pick image${e}");
+  }
+
+  }
+ File? gallery;
+ Future pickGallery()async{
+  try{
+    final gallery=await ImagePicker() .pickImage(source: 
+    ImageSource.gallery);
+    if(gallery==null) return;
+    final imagetemp1=File(gallery.path);
+    
+  }on PlatformException catch(e){
+    print("please click a image");
+  }
+ }
+  return
   Container(
     
     height: 250,
@@ -208,26 +251,42 @@ class _MyProfilePageState extends State<MyProfilePage> {
                  leading: Icon(Icons.photo_camera,
                  color: Color.fromRGBO(255, 255, 255, 0.7),
                  size: 24,),
-                title:Text("Open camera",style: GoogleFonts.poppins(
-                  textStyle:TextStyle(
-                    fontSize: 15,fontWeight: FontWeight.w400,color:
-                     Color.fromRGBO(255, 255, 255, 1)
-                  )
-                ) ,
-               )
+                title:InkWell(
+                  onTap:(){
+                    pickImage();
+                    print("hi");
+                  },
+                 
+                
+                 
+                  
+                  child: Text("Open camera",style: GoogleFonts.poppins(
+                    textStyle:TextStyle(
+                      fontSize: 15,fontWeight: FontWeight.w400,color:
+                       Color.fromRGBO(255, 255, 255, 1)
+                    )
+                  ) ,
+                               ),
+                )
                ),
-                ListTile(
-                 leading: Icon(Icons.image,
-                 color: Color.fromRGBO(255, 255, 255, 0.7),
-                 size: 25,),
-                title:Text("Choose from gallery",style: GoogleFonts.poppins(
-                  textStyle:TextStyle(
-                    fontSize: 15,fontWeight: FontWeight.w400,color:
-                     Color.fromRGBO(255, 255, 255, 1)
-                  )
-                ) ,
-               )
-               ),
+                InkWell(
+                  onTap: (() {
+                    pickGallery();
+
+                  }),
+                  child: ListTile(
+                   leading: Icon(Icons.image,
+                   color: Color.fromRGBO(255, 255, 255, 0.7),
+                   size: 25,),
+                  title:Text("Choose from gallery",style: GoogleFonts.poppins(
+                    textStyle:TextStyle(
+                      fontSize: 15,fontWeight: FontWeight.w400,color:
+                       Color.fromRGBO(255, 255, 255, 1)
+                    )
+                  ) ,
+                               )
+                               ),
+                ),
                 ListTile(
                  leading: Icon(Icons.delete,
                  color: Color.fromRGBO(255, 255, 255, 0.7),
@@ -244,5 +303,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
       ],
     ),
       
+
   );
-  
+ } 

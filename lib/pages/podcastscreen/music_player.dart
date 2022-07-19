@@ -1,14 +1,24 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:musiq/contants/contant_color.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musiq/pages/podcastscreen/podcast_all.dart';
+import 'package:just_audio/just_audio.dart';
+
+import 'dart:io';
+
 
 class MainMusicPlayer extends StatefulWidget {
   final allText;
   String subText;
+   
+  
   
 MainMusicPlayer({Key? key,required this.allText,required this.subText}) : super(key: key);
 
@@ -16,17 +26,51 @@ MainMusicPlayer({Key? key,required this.allText,required this.subText}) : super(
   State<MainMusicPlayer> createState() => _MainMusicPlayerState();
 }
 
+
 class _MainMusicPlayerState extends State<MainMusicPlayer> {
+late AudioPlayer player;
+late final playlist;
+  @override
+void initState() {
+  super.initState();
+  player = AudioPlayer();
+    
+                        playlist=ConcatenatingAudioSource(
+                      useLazyPreparation: true,
+                       shuffleOrder: DefaultShuffleOrder(),
+                      children:[
+                       AudioSource.uri(Uri.parse("https://api-musiq.applogiq.org/api/v1/audio?song_id=1"), ),
+                       AudioSource.uri(Uri.parse("https://api-musiq.applogiq.org/api/v1/audio?song_id=2"), ),
+                       AudioSource.uri(Uri.parse("https://api-musiq.applogiq.org/api/v1/audio?song_id=3"), ),
+                       AudioSource.uri(Uri.parse("https://api-musiq.applogiq.org/api/v1/audio?song_id=4"), ),
+                       AudioSource.uri(Uri.parse("https://api-musiq.applogiq.org/api/v1/audio?song_id=5"), ),
+                       AudioSource.uri(Uri.parse("https://api-musiq.applogiq.org/api/v1/audio?song_id=6"), ),
+                       AudioSource.uri(Uri.parse("https://api-musiq.applogiq.org/api/v1/audio?song_id=7"), ),
+                       AudioSource.uri(Uri.parse("https://api-musiq.applogiq.org/api/v1/audio?song_id=8"), ),
+                      ] );
+                      
+                
+  
+}
+@override
+void dispose() {
+  player.dispose();
+  super.dispose();
+}
+ 
 
 bool tapindex=false;
 final pointtext=[
   "0.25x","0.5x","0.75x","1.00x","1.25x","1.5x","1.75x","2x"
 ];
+final List <double> values=[];
 
 
   @override
   Widget build(BuildContext context) {
     
+
+   
     return  Scaffold(
         backgroundColor: color1,
         body: SingleChildScrollView(
@@ -69,11 +113,12 @@ final pointtext=[
                    child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
-               
                     children:[
                        
                     
-                    Text("Yeah, I don’t know",style:
+                    Text("Yeah, I don’t know",
+            
+                    style:
                     GoogleFonts.poppins(
                       textStyle: TextStyle(color: color2
                       )
@@ -139,13 +184,27 @@ final pointtext=[
               ],
             ),
           ),
+         
+
+
           Padding(
             padding: const EdgeInsets.only(top: 100,left: 24,right: 24),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.skip_previous_rounded,color: color2,size: 40,),
-                Icon(Icons.replay_10_rounded,color: color2,size: 40,),
+                InkWell(
+                  onTap: (() async{
+                         await player.seekToPrevious();
+                  }),
+                  
+                  
+                  child: Icon(Icons.skip_previous_rounded,color: color2,size: 40,)),
+                InkWell(
+                  onTap: (() async{
+                    await player.seek(Duration(seconds: player.position.inSeconds-10)) ;
+                  }),
+                  child: Icon(Icons.replay_10_rounded,color: color2,size: 40,
+                  )),
                 Container(
                   height: 60,
                   width: 60,
@@ -155,21 +214,49 @@ final pointtext=[
                   ),
                   child: 
                 InkWell
+              
                 (
-                  onTap: (() {
-                   
-                    setState(() {
-                      tapindex=!tapindex;
-                    });
-                  }),
+                  onTap: () async {
+                  print("sha");
+                  await player.setAudioSource(playlist, initialIndex: 0, initialPosition: Duration.zero);
+
+                  //  await player.setUrl("https://api-musiq.applogiq.org/api/v1/audio?song_id=8");
+                if (tapindex==false) {
+                   player.play();
+                }
+                else if(tapindex==true){
+
+                player.stop();
+                }
+                   setState(() {
+                     tapindex=!tapindex;
+                   });
+                  },
                  child: tapindex==false?Icon(Icons.play_arrow_rounded,
                  color: color2,size: 40,):
                  Icon(Icons.pause,color: color2,size: 40,)
                 )
                 ),
-                Icon(Icons.forward_10_rounded,color: color2,size: 40,),
-                Icon(Icons.skip_next_rounded,color: color2,size: 40,),
+                InkWell(
+                  onTap: ()async{
+                  await player.seek(Duration(seconds:
+                   player.position.inSeconds+10));
+
+                    
+                  },
+                  
+                  child: Icon(Icons.forward_10_rounded,color: color2,size: 40,)),
+                InkWell(
+                  onTap: () async{
+           
+                  await player.seekToNext();
+                  },
+                  child: Icon(Icons.skip_next_rounded,color: 
+                  color2,size: 40,),
+                ),
+
               ],
+              
             ),
           ),
            
@@ -211,7 +298,8 @@ final pointtext=[
                           child: InkWell(
                             onTap: () {
                               showModalBottomSheet(context: context,
-                               builder:(context)=> upnext(context),
+                               builder:(context)=> upnext(),
+
                                
                                isScrollControlled: true,
                                backgroundColor: Colors.transparent
@@ -303,6 +391,7 @@ class Sleeptimerlist extends StatefulWidget {
 
   @override
   State<Sleeptimerlist> createState() => _SleeptimerlistState();
+  
 }
 
 class _SleeptimerlistState extends State<Sleeptimerlist> {
@@ -338,16 +427,8 @@ class _SleeptimerlistState extends State<Sleeptimerlist> {
           height: 0,
           width: 0,
         ),
-        
-      
-        
       )
-     
-   
-     
-   
       )
-     
     );
   }
 }
@@ -469,8 +550,14 @@ class _NumtimerlistState extends State<Numtimerlist> {
   }
 }
 
-Widget upnext(context)
-{
+class upnext extends StatefulWidget {
+  const upnext({Key? key}) : super(key: key);
+
+  @override
+  State<upnext> createState() => _upnextState();
+}
+
+class _upnextState extends State<upnext> {
   final listMytitle=[
     "Episode 217 - The furry man","Episode 218 - Hard Work",
     "Episode 219 - Power","Episode 220 - Hire power",
@@ -488,6 +575,16 @@ Widget upnext(context)
     "35mins - Apr 08, 2022","47mins - Apr 10, 2022",
     "Episode 217 - The furry man","Episode 217 - The furry man",
   ];
+
+  int ourtitle=0;
+  
+  
+  @override
+  Widget build(BuildContext context) {
+    
+  
+  
+  
 return Container(
 height: 750,
 decoration: BoxDecoration(
@@ -549,7 +646,7 @@ child: Padding(
   
               }),
   
-              child: Icon(Icons.keyboard_arrow_up_rounded,color: color2,))
+              child: Icon(Icons.keyboard_arrow_down,color: color2,))
   
           ],
   
@@ -572,67 +669,67 @@ child: Padding(
           
             children: [
           
-              Row(
+              // Row(
           
-                children: [
+              //   children: [
           
-                  Padding(
+              //     Padding(
           
-                    padding: const EdgeInsets.only(left: 5,top: 40),
+              //       padding: const EdgeInsets.only(left: 5,top: 40),
           
-                    child: Icon(Icons.play_arrow_rounded,color: Colors.red,size: 35,),
+              //       child: Icon(Icons.play_arrow_rounded,color: Colors.red,size: 35,),
           
-                  ),
+              //     ),
           
-                  Padding(
+              //     Padding(
           
-                    padding: const EdgeInsets.only(top: 40),
+              //       padding: const EdgeInsets.only(top: 40),
           
-                    child: Padding(
+              //       child: Padding(
           
-                      padding: const EdgeInsets.only(left: 16),
+              //         padding: const EdgeInsets.only(left: 16),
           
-                      child: Column(
+              //         child: Column(
           
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              //           crossAxisAlignment: CrossAxisAlignment.start,
           
-                        children: [
+              //           children: [
           
-                          Text("Episode 216 - Motivation",style: GoogleFonts.poppins(
+              //             Text("Episode 216 - Motivation",style: GoogleFonts.poppins(
           
-                            textStyle: TextStyle(
+              //               textStyle: TextStyle(
           
-                              fontSize: 15,fontWeight: FontWeight.w400,color: color2
+              //                 fontSize: 15,fontWeight: FontWeight.w400,color: color2
           
-                            ),
+              //               ),
           
-                          ),),
+              //             ),),
           
-                           Text("1hr 25mins - Mar 23, 2022",style: GoogleFonts.poppins(
+              //              Text("1hr 25mins - Mar 23, 2022",style: GoogleFonts.poppins(
           
-                        textStyle: TextStyle(
+              //           textStyle: TextStyle(
           
-                          fontSize: 13,fontWeight: FontWeight.w400,color: color6
+              //             fontSize: 13,fontWeight: FontWeight.w400,color: color6
           
-                        ),
+              //           ),
           
-                      ),),
+              //         ),),
           
-                        ],
+              //           ],
           
-                      ),
+              //         ),
           
-                    ),
+              //       ),
           
-                  ),
+              //     ),
           
                   
           
               
           
-                ],
+              //   ],
           
-              ),
+              // ),
           
             
           
@@ -654,68 +751,79 @@ child: Padding(
           
                     padding: const EdgeInsets.only(top: 40),
           
-                    child: Row(
-          
-                      mainAxisAlignment: MainAxisAlignment.start,
-          
-          
-          
-                      
-          
-                      children: [
-          
-                        Padding(
-          
-                          padding: const EdgeInsets.only(left: 8),
-          
-                          child: Icon(Icons.view_stream_rounded,color:color2,size: 25,),
-          
-                        ),
-          
-                        Padding(
-          
-                          padding: const EdgeInsets.only(right: 5),
-          
-                          child: Padding(
-          
-                            padding: const EdgeInsets.only(left: 21),
-          
-                            child: Column(
-          
-                              crossAxisAlignment: CrossAxisAlignment.start,
-          
-                              children: [
-          
-                                Text(listMytitle[index].toString(),style: GoogleFonts.poppins(
-          
-                                  textStyle: TextStyle(
-          
-                                    fontSize: 15,fontWeight: FontWeight.w400,color: color2
-          
-                                  ),
-          
-                                ),),
-          
-                                 Text(listMysubtitle[index].toString(),style: GoogleFonts.poppins(
-          
-                              textStyle: TextStyle(
-          
-                                fontSize: 13,fontWeight: FontWeight.w400,color: color6
-          
-                              ),
-          
-                            ),),
-          
-                              ],
-          
-                            ),
-          
+                    child: InkWell(
+                      onTap: (() {
+                        setState(() {
+                          print("hi");
+                          ourtitle=index;
+                        });
+                      }),
+                      child: Row(
+                              
+                        mainAxisAlignment: MainAxisAlignment.start,
+                              
+                              
+                              
+                        
+                              
+                        children: [
+                              
+                          Padding(
+                              
+                            padding: const EdgeInsets.only(left: 8),
+                              
+                            child: ourtitle==index? 
+                            Icon(Icons.play_arrow_rounded,color: Colors.red):
+                            Icon(Icons.view_stream_rounded,
+                            color:color2,size: 25,),
+                              
                           ),
-          
-                        ),
-          
-                      ],
-          
+                              
+                          Padding(
+                              
+                            padding: const EdgeInsets.only(right: 5),
+                              
+                            child: Padding(
+                              
+                              padding: const EdgeInsets.only(left: 21),
+                              
+                              child: Column(
+                              
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                              
+                                children: [
+                              
+                                  Text(listMytitle[index].toString(),style: GoogleFonts.poppins(
+                              
+                                    textStyle: TextStyle(
+                              
+                                      fontSize: 15,fontWeight: FontWeight.w400,color: color2
+                              
+                                    ),
+                              
+                                  ),),
+                              
+                                   Text(listMysubtitle[index].toString(),style: GoogleFonts.poppins(
+                              
+                                textStyle: TextStyle(
+                              
+                                  fontSize: 13,fontWeight: FontWeight.w400,color: color6
+                              
+                                ),
+                              
+                              ),),
+                              
+                                ],
+                              
+                              ),
+                              
+                            ),
+                              
+                          ),
+                              
+                        ],
+                              
+                      ),
                     ),
           
                   ),
@@ -752,4 +860,5 @@ child: Padding(
 ),
 
 );
+}
 }
